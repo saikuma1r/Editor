@@ -1,0 +1,120 @@
+<html> 
+<head>
+  <meta charset="UTF-8">
+  <title>JSON Beautifier + Compressor + Folding</title>
+  <link rel="stylesheet" href="css/style1.css">
+  <link rel="stylesheet" href="css/style2.css">
+  <link rel="stylesheet" href="css/style3.css">
+  
+</head>
+<body>
+  <label class="switch">
+    <input type="checkbox" onchange="toggleTheme(this)">
+    <span class="slider round"></span>
+  </label>
+  <h3>Editable JSON Editor (with Color + Folding)</h3>
+  <div id="success"></div>
+  <div id="errorMessage"></div> 
+
+  <textarea id="jsonEditor" style="display: none;">
+    
+  </textarea>
+  <br>
+  <button id="copyButton2" onclick="beautifyJSON()">Beautify</button>
+  <button id="copyButton3" onclick="clearEditorContent()">Clear</button>
+  <button id="copyButton1" onclick="compressJSON()">Compress</button>
+
+  <!-- Error message display -->
+ 
+
+  <!-- Copy button -->
+  <button id="copyButton" onclick="copyToClipboard()">Copy</button>
+  <!-- Scripts -->
+  <script src="js/script1.js"></script>
+  <script src="js/script2.js"></script>
+  <script src="js/script3.js"></script>
+  <script src="js/script4.js"></script>
+  <script src="js/script5.js"></script>
+
+  <script>
+    const editor = CodeMirror.fromTextArea(document.getElementById("jsonEditor"), {
+      mode: { name: "javascript", json: true },
+      lineNumbers: true,
+      lineWrapping: true,
+      foldGutter: true,
+      gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+      theme: "default"  // Applying default theme (you can use others like "monokai")
+    });
+    function success(message){
+      const success = document.getElementById("success");
+      success.textContent = message;
+     success.style.display = 'block';
+     const errorMessage = document.getElementById("errorMessage");
+     errorMessage.style.display = 'none';
+    }
+    function showError(message) {
+      const errorMessageDiv = document.getElementById("errorMessage");
+      errorMessageDiv.textContent = message;
+      errorMessageDiv.style.display = 'block';
+      const success = document.getElementById("success");
+      success.style.display = 'none';
+    }
+
+    function clearError() {
+      const errorMessageDiv = document.getElementById("errorMessage");
+      errorMessageDiv.style.display = 'none';
+      const success = document.getElementById("success");
+      success.style.display = 'none';
+    }
+
+    function beautifyJSON() {
+      try {
+        clearError();
+        const json = JSON.parse(editor.getValue());
+        const pretty = JSON.stringify(json, null, 4);
+        editor.setValue(pretty);
+        success("JSON is valid");
+      } catch (e) {
+        showError("Invalid JSON: " + e.message);
+      }
+    }
+
+    function compressJSON() {
+      try {
+        clearError();
+        const json = JSON.parse(editor.getValue());
+        const compressed = JSON.stringify(json);
+        editor.setValue(compressed);
+        success("JSON is valid");
+      } catch (e) {
+        showError("Invalid JSON: " + e.message);
+      }
+    }
+
+    function copyToClipboard() {
+      
+      const text = editor.getValue();
+      navigator.clipboard.writeText(text).then(() => {}).catch((err) => {
+        alert("Failed to copy: " + err);
+      });
+      success("successfully copied to clipboard");
+    }
+    function clearEditorContent() {
+      editor.setValue("");
+      success("Editor content cleared");
+    }
+
+
+    function toggleTheme(checkbox) {
+      if (checkbox.checked) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+    }
+  </script>
+
+
+</body>
+
+</html>
