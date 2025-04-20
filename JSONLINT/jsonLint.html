@@ -40,7 +40,7 @@
     const editor = CodeMirror.fromTextArea(document.getElementById("jsonEditor"), {
       mode: { name: "javascript", json: true },
       lineNumbers: true,
-      lineWrapping: true,
+      lineWrapping: false,
       foldGutter: true,
       gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
       theme: "default"  // Applying default theme (you can use others like "monokai")
