@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>List Comparison</title>
+  <style>
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      resize: vertical;
+    }
+
+    .output-container {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .column {
+      flex: 1;
+    }
+
+    label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>Compare Two Lists (Line by Line)</h2>
+
+  <div class="container">
+    <div class="column">
+      <label>List A:</label><br>
+      <textarea id="listA" placeholder="Enter items one per line"></textarea>
+    </div>
+    <div class="column">
+      <label>List B:</label><br>
+      <textarea id="listB" placeholder="Enter items one per line"></textarea>
+    </div>
+  </div>
+
+  <br>
+  <button onclick="compareLists()">Compare</button>
+
+  <div class="output-container">
+    <div class="column">
+      <label>Only in List A:</label><br>
+      <textarea id="onlyA" placeholder="Output will appear here..."></textarea>
+    </div>
+    <div class="column">
+      <label>Only in List B:</label><br>
+      <textarea id="onlyB" placeholder="Output will appear here..."></textarea>
+    </div>
+    <div class="column">
+      <label>Common Items:</label><br>
+      <textarea id="common" placeholder="Output will appear here..."></textarea>
+    </div>
+  </div>
+
+  <script>
+    function compareLists() {
+      const listA = document.getElementById('listA').value
+        .split('\n').map(item => item.trim().toLowerCase()).filter(Boolean);
+      const listB = document.getElementById('listB').value
+        .split('\n').map(item => item.trim().toLowerCase()).filter(Boolean);
+
+      const onlyInA = listA.filter(item => !listB.includes(item));
+      const onlyInB = listB.filter(item => !listA.includes(item));
+      const common = listA.filter(item => listB.includes(item));
+
+      document.getElementById('onlyA').value = onlyInA.join('\n');
+      document.getElementById('onlyB').value = onlyInB.join('\n');
+      document.getElementById('common').value = common.join('\n');
+    }
+  </script>
+</body>
+</html>
