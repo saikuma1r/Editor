@@ -1,3 +1,3 @@
 # Editor
-[JsonLint](https://github.com/saikuma1r/Editor/blob/main/JSONLINT/jsonLint.html)
-[ListDiff](https://github.com/saikuma1r/Editor/blob/main/JSONLINT/ListDiff.html)
+[JsonLint](https://saikuma1r.github.io/Editor/JSONLINT/jsonLint.html)
+[ListDiff](https://saikuma1r.github.io/Editor/JSONLINT/ListDiff.html)
