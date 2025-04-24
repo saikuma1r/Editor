@@ -64,9 +64,9 @@
   <script>
     function compareLists() {
       const listA = document.getElementById('listA').value
-        .split('\n').map(item => item.trim().toLowerCase()).filter(Boolean);
+        .split('\n').map(item => item.trim()).filter(Boolean);
       const listB = document.getElementById('listB').value
-        .split('\n').map(item => item.trim().toLowerCase()).filter(Boolean);
+        .split('\n').map(item => item.trim()).filter(Boolean);
 
       const onlyInA = listA.filter(item => !listB.includes(item));
       const onlyInB = listB.filter(item => !listA.includes(item));
